@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Message System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">⚡ SMRS</div>
+            <h1>Smart Message Routing System</h1>
+            <div class="status-dot"><span></span> LIVE</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Add Message Form -->
+        <section class="card form-card">
+            <div class="card-label">01 / INPUT</div>
+            <h2>New Message</h2>
+            <div class="form-grid">
+                <div class="field">
+                    <label>Message ID</label>
+                    <input type="number" id="msgId" placeholder="e.g. 101">
+                </div>
+                <div class="field">
+                    <label>Priority</label>
+                    <select id="msgPriority">
+                        <option value="1">🔴 1 — High</option>
+                        <option value="2">🟡 2 — Medium</option>
+                        <option value="3">🟢 3 — Low</option>
+                    </select>
+                </div>
+                <div class="field full">
+                    <label>Content</label>
+                    <input type="text" id="msgText" placeholder="Type your message...">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="addMessage()">+ Add Message</button>
+            <div id="formError" class="error-msg"></div>
+        </section>
+
+        <!-- Queue Display -->
+        <section class="card queue-card">
+            <div class="card-label">02 / QUEUE</div>
+            <div class="section-header">
+                <h2>Pending Messages</h2>
+                <div class="actions">
+                    <button class="btn btn-sm" onclick="peekMessage()">👁 Peek</button>
+                    <button class="btn btn-sm btn-send" onclick="sendMessage()">▶ Send Next</button>
+                </div>
+            </div>
+            <div id="queueEmpty" class="empty-state">No messages in queue</div>
+            <div id="queueList" class="message-list"></div>
+        </section>
+
+        <!-- Last Sent -->
+        <section class="card stack-card">
+            <div class="card-label">03 / STACK</div>
+            <h2>Last Sent</h2>
+            <div id="stackDisplay" class="stack-display">
+                <div class="empty-state">No messages sent yet</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-box">
+            <h3>Edit Message</h3>
+            <input type="hidden" id="editId">
+            <div class="field">
+                <label>New Content</label>
+                <input type="text" id="editText" placeholder="New content...">
+            </div>
+            <div class="field">
+                <label>New Priority</label>
+                <select id="editPriority">
+                    <option value="1">🔴 1 — High</option>
+                    <option value="2">🟡 2 — Medium</option>
+                    <option value="3">🟢 3 — Low</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="saveEdit()">Save</button>
+                <button class="btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
